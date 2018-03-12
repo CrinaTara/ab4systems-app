@@ -1,0 +1,51 @@
+<h2 class="d-flex justify-content-center">List Of Developers</h2>
+<div class="button">
+  <div class="btn-group" dropdown>
+    <button dropdownToggle type="button" class="btn btn-light dropdown-toggle">
+      Sort
+      <span class="caret"></span>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu" role="menu">
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="sortAZ()">A-Z</a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="sortZA()">Z-A</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <p>Or search by name</p>
+    <input #developerName type="text" id="name" placeholder="">
+    <a class="btn btn-light" (click)="searchByName(developerName.value)">Search</a>
+  </div>
+</div>
+<div *ngIf="noDevelopers">
+  <p>No developers.</p>
+</div>
+<div *ngFor="let developer of developers">
+  <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-4 container">
+    <div (click)="detailsAboutDeveloper(developer)" class="card">
+      <div class="card-img-top">
+      </div>
+
+      <div class="card-block">
+        <figure class="profile">
+          <img src="{{developer.profile_image}}" class="profile-avatar">
+        </figure>
+      </div>
+      <div class="card-title ">
+        <a class="d-flex justify-content-center">
+          {{developer.display_name}}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Pagination-->
+<!-- <div *ngIf="bigTotalItems > 10" class="col-md-6 ">
+      <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination" (pageChanged)="pageChanged($event)"
+        [boundaryLinks]="true"></pagination>
+    </div> -->
