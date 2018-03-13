@@ -9,6 +9,7 @@ import { routingComponents } from './app-routing.module';
 import { DevelopersService } from './services/developers.service';
 import { PaginationModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     HttpClientModule,
     HttpModule,
     PaginationModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DevelopersService],
   bootstrap: [AppComponent]

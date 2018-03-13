@@ -23,14 +23,21 @@ export class DevelopersService {
     this.options = new RequestOptions({ headers: this.headers });
 
   }
-  getDevelopers() {
+  // getDevelopers() {
+  //   this.setHeaders();
+  //   return this._http.get(this.URL + "/2.2/users?order=desc&sort=reputation&site=stackoverflow")
+  //     .map((response: Response) => response.json())
+  //     .catch(this._errorHandler);
+
+  // }
+
+  getDevelopers(nrPage) {
     this.setHeaders();
-    return this._http.get(this.URL + "/2.2/users?order=desc&sort=reputation&site=stackoverflow")
+    return this._http.get(this.URL + "/2.2/users?page="+nrPage+"&pagesize=15&order=desc&sort=reputation&site=stackoverflow")
       .map((response: Response) => response.json())
       .catch(this._errorHandler);
 
   }
-
   getDeveloper(id){
     console.log(id);
     return this._http.get(this.URL + "/2.2/users/"+id+"?order=desc&sort=reputation&site=stackoverflow")
@@ -50,13 +57,6 @@ export class DevelopersService {
     .catch(this._errorHandler);
   }
 
-  // getDevelopers(nrPage) {
-  //   this.setHeaders();
-  //   return this._http.get(this.URL + "/2.2/users?page="+nrPage.page+"&pagesize="+nrPage.itemsPerPage +"&order=desc&sort=reputation&site=stackoverflow")
-  //     .map((response: Response) => response.json())
-  //     .catch(this._errorHandler);
-// 
-  // }
   
   _errorHandler(error: Response) {
     // console.error(error);

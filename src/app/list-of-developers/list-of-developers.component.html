@@ -44,8 +44,11 @@
   </div>
 </div>
 
+<div class="clearfix"></div>
 <!--Pagination-->
-<!-- <div *ngIf="bigTotalItems > 10" class="col-md-6 ">
-      <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination" (pageChanged)="pageChanged($event)"
-        [boundaryLinks]="true"></pagination>
-    </div> -->
+<div *ngIf="bigTotalItems < 15" class="d-flex justify-content-start">
+  <pagination  [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination" (pageChanged)="pageChanged($event)"
+    [boundaryLinks]="true"></pagination>
+</div>
+
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DevelopersService } from '../services/developers.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { PaginationModule } from 'ngx-bootstrap';
 
 @Component({
   selector: 'list-of-developers',
@@ -14,33 +15,29 @@ export class ListOfDevelopersComponent implements OnInit {
   noDevelopers: boolean;
 
   public maxSize: number = 5;
-  public bigTotalItems: number;
+  public bigTotalItems: number = 10000;
   public bigCurrentPage: number = 1;
-  public numPages: number = 0;
 
   constructor(private _developersService: DevelopersService, private router: Router) { }
 
-  public getDevelopers(){
-    this._developersService.getDevelopers()
+  public getDevelopers(data){
+    this._developersService.getDevelopers(data)
     .subscribe(developersData => {
       this.developers = developersData.items;
       if (!this.developers.length) {
         this.noDevelopers = true;
       } else this.noDevelopers = false;
-
-      // this.bigTotalItems = 100;
-      // console.log("Rapoarte toate " + this.bigTotalItems);
+      this.bigTotalItems = 10000;
     },
     error => this.errorMsg = error);
   }
 
-  // public pageChanged(event: any): void {
-  //   console.log('Page changed to: ' + event.page);
-  //   console.log('Number items per page: ' + event.itemsPerPage);
-  //   this.getDevelopers(event);
-  //   this.bigCurrentPage = event.page;
-  //   console.log("Numarul s-a schimbat: " + this.bigCurrentPage);
-  // }
+  public pageChanged(event: any): void {
+    console.log('Page changed to: ' + event.page);
+    this.getDevelopers(event.page);
+    this.bigCurrentPage = event.page;
+    console.log("Numarul s-a schimbat: " + this.bigCurrentPage);
+  }
 
   detailsAboutDeveloper(developer){
     console.log(developer.account_id);
@@ -48,8 +45,8 @@ export class ListOfDevelopersComponent implements OnInit {
 
   }
 
-  sortAZ(){
-    this._developersService.sort('desc')
+  sort(data){
+    this._developersService.sort(data)
     .subscribe(developersData => {
       this.developers = developersData.items;
       if (!this.developers.length) {
@@ -59,15 +56,12 @@ export class ListOfDevelopersComponent implements OnInit {
     error => this.errorMsg = error);
   }
 
+  sortAZ(){
+    this.sort('desc');
+  }
+
   sortZA(){
-    this._developersService.sort('asc')
-    .subscribe(developersData => {
-      this.developers = developersData.items;
-      if (!this.developers.length) {
-        this.noDevelopers = true;
-      } else this.noDevelopers = false;
-    },
-    error => this.errorMsg = error);
+    this.sort('asc');
   }
 
   searchByName(data){
@@ -83,11 +77,7 @@ export class ListOfDevelopersComponent implements OnInit {
   }
 
   ngOnInit() {
-    let nrPage = {
-      page: 1,
-      itemsPerPage: 10
-    }
-    this.getDevelopers();
+    this.getDevelopers(this.bigCurrentPage);
   }
 
 }

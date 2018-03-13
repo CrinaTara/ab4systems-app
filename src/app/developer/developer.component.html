@@ -1,24 +1,30 @@
-<h1 class="d-flex justify-content-center">{{this.developer.display_name}}</h1>
+<h1 class="d-flex justify-content-center">{{developer.display_name}}</h1>
 <div class="content">
   <div class="d-flex justify-content-center">
-    <img src="{{this.developer.profile_image}}" class="profile-avatar" />
+    <img src="{{developer.profile_image}}" class="profile-avatar" />
   </div>
-  <!-- <div class="row d-flex">
-    <div class="justify-item-start ">
-      {{this.developer.badge_counts.bronze}} 
+
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="medal">
+        <div class="bronze"></div>
+        {{this.developer.badge_counts.bronze}}
+      </div>
+      <div class="medal">
+        <div class="silver"></div>
+        {{this.developer.badge_counts.silver}}
+      </div>
+      <div class="medal">
+        <div class="gold"></div>
+        {{this.developer.badge_counts.gold}}
+      </div>
     </div>
-    <div class="justify-item-center ">
-      {{this.developer.badge_counts.silver}} 
-    </div>
-    <div class="justify-item-end ">
-      {{this.developer.badge_counts.gold}}
-    </div>
-  </div> -->
+  </div>
 
   <div class="d-flex justify-content-center">
-    Location: <b> {{this.developer.location}}</b>
+    Location: <b>{{developer.location}}</b>
   </div>
 
 </div>
 
-<button class="btn btn-light d-flex justify-content-around"  routerLink="/list-of-developers">Back</button>
+<button class="btn btn-light d-flex justify-content-around" routerLink="/list-of-developers">Back</button>
